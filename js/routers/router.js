@@ -4,11 +4,12 @@ define([
   'underscore',
   'backbone',
   'views/quoteView',
-  'views/recipeView'
+  'views/recipeView',
+  'views/placeView'
   // 'views/projects/ProjectsView',
   // 'views/contributors/ContributorsView',
   // 'views/footer/FooterView'
-], function($, _, Backbone, QuoteView, RecipeView){//, HomeView, ProjectsView, ContributorsView, FooterView) {
+], function($, _, Backbone, QuoteView, RecipeView, PlaceView){//, HomeView, ProjectsView, ContributorsView, FooterView) {
   
   var AppRouter = Backbone.Router.extend({
     routes: {
@@ -32,6 +33,9 @@ define([
       quoteView.render();
       var recipeView = new RecipeView();
       recipeView.render();
+      var placeView = new PlaceView();
+      placeView.render();
+
         // Call render on the module we loaded in via the dependency array
         // var projectsView = new ProjectsView();
         // projectsView.render();

@@ -1,0 +1,8 @@
+<% _.each(places, function(place){ %>
+		<% console.log(place.toJSON()) %> 
+		<p> <%= place.get("name") %> </p>
+		<p> <%= place.get("address") %> </p>
+		<p> <%= place.get("type") %> </p>
+
+	
+<% }); %>	
