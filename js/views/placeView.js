@@ -7,10 +7,10 @@ define([
   'text!templates/place/placeTemplate.html'
 ], function($, _, Backbone, PlaceList, gmaps, placeTemplate){
   var PlaceView = Backbone.View.extend({
-    el: '.mappa',
+    el: '#mappa',
     initialize: function(){
       this.places = new PlaceList();
-      
+
       var template = _.template(placeTemplate);
       this.$el.html(template);  
     },
@@ -24,15 +24,19 @@ define([
           //create list of points
           var points = [];
           //for each place
+          var ico = '';
           _.each(places.models, function(place){
-              console.log(place.get('name'));
-              console.log(place.get('latitude'));
-              console.log(place.get('longitude'));
+            
+              if(place.get('type')=='gym'){
+                ico = 'img/weight.png';  
+              }else{
+                ico = 'img/jogging.png';
+              }
             points.push({
               
               title: place.get('name'),
               position: new gmaps.LatLng(place.get('latitude'), place.get('longitude')),
-              icon: 'img/jogging.png' 
+              icon: ico
             });  
           });
           console.log("lunghezza="+points.length);
@@ -40,12 +44,13 @@ define([
           // define map options
           var mapOptions = {
             center: myPos,
-            zoom: 8
+            zoom: 14
           };
 
           console.log(mapOptions);
           // init map
           
+          console.log("esiste? "+ document.getElementById("mappa"));
           console.log("esiste? "+ document.getElementById("map-canvas"));
           var map = new gmaps.Map(document.getElementById("map-canvas"), mapOptions);
           
@@ -59,7 +64,6 @@ define([
           _.each(markers, function(marker){
             marker.setMap(map);
           });
-              
         }
       });
     }

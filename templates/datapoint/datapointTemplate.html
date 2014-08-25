@@ -1,0 +1,26 @@
+<div class="row">
+	<h2>PROVA</h2>
+	<table class="table striped datapoints">
+		<thead>
+			<tr>
+				<th>Value</th>
+				<th>Description</th>
+				<th>Date</th>
+			</tr>
+		</thead>
+		<tbody>
+				
+			<% datapoints.each(function (datapoint) { %>
+				<tr>
+					<td> <%= datapoint.get("value") %> </td>
+					<td> <%= datapoint.get("description") %> </td>
+					<% var time = new Date(datapoint.get("timestamp")); %>					
+					<td> <%= time %> </td>
+				</tr>
+			<% }); %>			
+
+		</tbody>
+		
+	</table>					
+</div>
+

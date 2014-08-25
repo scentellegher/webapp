@@ -1,6 +1,6 @@
 define(['underscore','backbone'], function(_, Backbone) {
   var Recipe = Backbone.Model.extend({
-  		urlRoot: "http://localhost:8084/virtualcoach/rest/recipe",
+  		urlRoot: "/recipe",
 		defaults: {
 			name: 'None',
 			recipeUrl: 'None',
