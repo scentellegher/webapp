@@ -1,31 +1,36 @@
-<div class="row">
-	<h2>My Goals</h2>
-	<table class="table striped mygoals">
-		<thead>
-			<tr>
-				<th>Title</th>
-				<th>Type</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% goals.each(function (goal) { %>
-				<tr>
-					<td> <a href="#/goal/<%= goal.id %>"><%= goal.get("title") %></a> </td>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+    	<h3 class="panel-title">My Goals</h3>
+  	</div>
+  	<div class="panel-body">
+		
+			<div class="list-group">
+				<% goals.each(function (goal) { %>
+
 					<% var selectType = function () {
 						if (goal.get("goalType")==1) {
 							return { s : "label-success", t:"weight"};
 						}else if (goal.get("goalType")==2){
-							return { s : "label-danger", t:"calories"};
+							return { s : "label-primary", t:"calories"};
 						}else if (goal.get("goalType")==3){
-							return { s : "label-primary", t:"distance"};
+							return { s : "label-danger", t:"distance"};
 						}else {
 							return { s : "label-default", t: goal.get("goalType")}; 
 						};
 					} %>
-					<td> <span class="label <%=selectType().s%>"><%= selectType().t %></span> </td>
-				</tr>
-			<% }); %>			
-		</tbody>
-		
-	</table>					
+				
+				    <a href="#/goal/<%= goal.get('goalType')%>/<%= goal.id %>" class="list-group-item">
+				    	<strong><%= goal.get("title") %></strong>
+				    	<span class="label pull-right <%=selectType().s %>"><%= selectType().t %></span>
+				    </a>
+						          			
+				<% }); %>
+				
+			</div>
+			<div>
+				<center>
+					<a href="#" class="btn btn-primary" role="button">Add Goal</a>
+					</center>
+				</div>
+	</div>
 </div>

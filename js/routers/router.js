@@ -1,4 +1,3 @@
-// Filename: router.js
 define([
   'jquery',
   'underscore',
@@ -14,7 +13,7 @@ define([
     routes: {
       // Define some URL routes
       '' : 'home',
-      'goal/:goalId' : "goal"
+      'goal/:type/:goalId' : "goal"
     }
   });
   
@@ -22,8 +21,8 @@ define([
     
     var app_router = new AppRouter;
     
-    app_router.on('route:home', function(){//id){
-    
+    app_router.on('route:home', function(){
+      console.log("ROUTE"+this.routes[Backbone.history.fragment]);
       var quoteView = new QuoteView();
       quoteView.render();
       var recipeView = new RecipeView();
@@ -31,16 +30,18 @@ define([
       var placeView = new PlaceView();
       placeView.render();
       var goalView = new GoalView();
-      goalView.render();//{id: id});
+      goalView.render();
 
     });
 
-    app_router.on('route:goal', function (goalId) {
+    app_router.on('route:goal', function (type, goalId) {
+           console.log("ROUTE"+this.routes[Backbone.history.fragment]);
         var dataView = new DataView()
-        dataView.render({goalId: goalId});
+        dataView.render({goalId: goalId, type: type});
       });
 
     Backbone.history.start();
+    
   };
 
   return { 

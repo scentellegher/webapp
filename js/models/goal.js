@@ -1,5 +1,12 @@
 define(['underscore','backbone'], function(_, Backbone) {
   var Goal = Backbone.Model.extend({
+  	initialize: function (options){
+      this.id = options.id;
+    },
+    url: function () {
+      return "/storage/goal/" + this.id;
+    },
+
 		defaults: {
 			"goalDateEnd": 0,
 		    "goalDateStart": 0,

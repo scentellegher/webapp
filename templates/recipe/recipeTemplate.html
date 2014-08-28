@@ -1,17 +1,29 @@
-<div class="row">
-	<h3><%= recipe.get("name") %></h3>
-</div>
-<div class="row">
-	<img src="<%= recipe.get('imageUrl')%>" class="img-responsive">
-</div>
-<div class="row">
-	<a href="<%= recipe.get('recipeUrl') %>">Recipe URL</a>
-</div>
-<div class="row">
-	<ul>
-		<% var ingredients = recipe.get('ingredients') %>
-		<% for(var ing in ingredients) { %>
-           <li><%= ingredients[ing] %></li>
-       	<% } %>	
-	</ul>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Suggested Healty Recipe</h3>
+  </div>
+  <div class="panel-body">
+  	<center>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+    			<strong>
+    				<h3 style="color: #015697">
+    					<a href="<%= recipe.get('recipeUrl') %>"><%= recipe.get("name") %></a>
+    				</h3>
+    			<strong>
+    		</div>
+  			<div class="panel-body">
+    			<img src="<%= recipe.get('imageUrl')%>" class="img-thumbnail" style="height: 200px; weight: 200px">
+  			</div>
+		</div>
+		<ul class="list-group">
+					<% var ingredients = recipe.get('ingredients') %>
+					<% for(var ing in ingredients) { %>
+	           			<li class="list-group-item"><%= ingredients[ing] %> <span class="badge">ingredient</span></li>
+
+	       			<% } %>	
+				</ul>
+	</center>
+  </div>
 </div>

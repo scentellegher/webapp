@@ -6,6 +6,8 @@ require.config({
     "bootstrap" : "libs/bootstrap.min",
     "text" : "libs/text",
     "async": "libs/async",
+    "goog": 'libs/goog',
+    "propertyParser" : 'libs/propertyParser',
     "router" : "routers/router",
     "templates": '../templates'
   },
@@ -31,6 +33,13 @@ define('gmaps', ['async!http://maps.google.com/maps/api/js?v=3&key=<MY_KEY>&sens
     // return the gmaps namespace for brevity
     return window.google.maps;
 });
+
+
+  //To load google libraries you should follow the format "goog!moduleName,version,packages:[packages],language:en,anotherOption:value"
+define('gchart', ['goog!visualization,1,packages:[corechart]'], function(){
+    return google.visualization;
+});
+
 
 require(['app'], 
     function(App){
