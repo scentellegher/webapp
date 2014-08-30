@@ -18,11 +18,16 @@
 							return { s : "label-default", t: goal.get("goalType")}; 
 						};
 					} %>
-				
-				    <a href="#/goal/<%= goal.get('goalType')%>/<%= goal.id %>" class="list-group-item">
-				    	<strong><%= goal.get("title") %></strong>
-				    	<span class="label pull-right <%=selectType().s %>"><%= selectType().t %></span>
-				    </a>
+					
+					<div class="panel panel-default">
+					  <div class="panel-body">
+					    <a href="#/goal/<%= goal.id %>" class="list-group-item">
+					    	<strong><%= goal.get("title") %></strong>
+					    </a>
+					    <span class="label pull-left <%=selectType().s %>"><%= selectType().t %></span>
+					    <a href="#/edit/<%= goal.id %>" class="btn btn-danger pull-right" role="button">Edit Goal</a>
+					  </div>
+					</div>
 						          			
 				<% }); %>
 				

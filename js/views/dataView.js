@@ -31,11 +31,33 @@ define([
 				that.datapoints = new Datapoints({id: options.goalId});
 				that.datapoints.fetch({
 					success: function() {
-						var my_array = [['Day','Measure']];
+						var selectType = function () {
+							if (that.mygoal.get('goalType')==1) {
+								return { t:"weight", m:"kg"};; 
+							}else if (that.mygoal.get('goalType')==2) {
+								return { t:"calories", m:"cal"}; 
+							}else if (that.mygoal.get('goalType')==3) {
+								return { t:"distance", m:"km"};
+							}else if (that.mygoal.get('goalType')==4) {
+								return { t:"sleep", m:"hours"};
+							}else if (that.mygoal.get('goalType')==5) {
+								return { t:"steps", m:"steps"};;
+							}else if (that.mygoal.get('goalType')==6){
+								return { t:"floors", m:"floors"};
+							}else{
+								return {};
+							};
+						}
+						console.log("TIPO "+selectType().t);
+						var my_array = [['Day','Measure', 'Goal']];
 						var day_number = 1;	
 						that.datapoints.each(function (datapoint) {
-							my_array.push([day_number.toString() , datapoint.get('value')]);
-							console.log([day_number.toString() , datapoint.get('value')]);
+							// if (day_number==that.datapoints.length){
+							// 	my_array.push([day_number.toString() , datapoint.get('value'), that.mygoal.get('goalValue')]);	
+							// } else {
+							// 	my_array.push([day_number.toString() , datapoint.get('value'), null]);
+							// }
+							my_array.push([day_number.toString() , datapoint.get('value'), that.mygoal.get('goalValue')]);	
 							day_number++;
 						});         
 
@@ -44,12 +66,10 @@ define([
 				        var options = {
 				        		"legend": "none",
 				        		'chartArea': {'width': '80%', 'height': '80%'}, 
-				        		'pointSize': 4,
-				        		"vAxis":{"title":"weight"},
+				        		'series': [{pointSize: 4}, {}],
+				        		"vAxis":{"title": selectType().t+" ("+selectType().m+")"},
 				        		"hAxis":{"title":"days"},
 				        		"legend":"none"
-
-
 				        };
 				        
 						var template = _.template(datapointTemplate, {datapoints: that.datapoints, goal: that.mygoal});
@@ -73,7 +93,6 @@ define([
 			console.log("SAJDAL");
 			return false; //do not refresh the browser
 		}
-
 	});
 	return DataView;
 });
