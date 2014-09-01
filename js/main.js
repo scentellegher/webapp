@@ -4,6 +4,8 @@ require.config({
     "underscore" : "libs/underscore-min",
     "backbone" : "libs/backbone-min",
     "bootstrap" : "libs/bootstrap.min",
+    "bootstrap_datetimepicker": 'libs/bootstrap-datetimepicker',
+    "moment": 'libs/moment',
     "text" : "libs/text",
     "async": "libs/async",
     "goog": 'libs/goog',
@@ -22,13 +24,18 @@ require.config({
     'backbone': {
       deps: ["underscore", "jquery"],
       exports: 'Backbone'
-    }
+    },
+    'bootstrap_datetimepicker' : {
+      deps: ['bootstrap', 'moment'],
+      exports: '$.fn.datetimepicker'
+    },
+    app : ['backbone', 'bootstrap','bootstrap_datetimepicker']
   }
 });
 
 //http://blog.millermedeiros.com/requirejs-2-0-delayed-module-evaluation-and-google-maps/
 // convert Google Maps into an AMD module
-define('gmaps', ['async!http://maps.google.com/maps/api/js?v=3&key=AIzaSyDXLdYT4me2Pl7l9n6MhxfBeBg6lhg-XzQ&sensor=false'], 
+define('gmaps', ['async!http://maps.google.com/maps/api/js?v=3&key=<my_key>&sensor=false'], 
   function(){
     // return the gmaps namespace for brevity
     return window.google.maps;

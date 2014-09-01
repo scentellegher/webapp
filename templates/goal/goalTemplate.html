@@ -14,8 +14,12 @@
 							return { s : "label-primary", t:"calories"};
 						}else if (goal.get("goalType")==3){
 							return { s : "label-danger", t:"distance"};
+						}else if (goal.get("goalType")==4){
+							return { s : "label-info", t:"sleep"};
+						}else if (goal.get("goalType")==5){
+							return { s : "label-warning", t:"steps"};
 						}else {
-							return { s : "label-default", t: goal.get("goalType")}; 
+							return { s : "label-default", t: "floors"}; 
 						};
 					} %>
 					
@@ -34,7 +38,7 @@
 			</div>
 			<div>
 				<center>
-					<a href="#" class="btn btn-primary" role="button">Add Goal</a>
+					<a href="#/new" class="btn btn-primary" role="button">Add Goal</a>
 					</center>
 				</div>
 	</div>

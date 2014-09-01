@@ -15,7 +15,8 @@ define([
       // Define some URL routes
       '' : 'home',
       'goal/:goalId' : "goal",
-      'edit/:id' : "edit"
+      'edit/:id' : "edit",
+      'new' : "edit"
     }
   });
   
@@ -44,9 +45,10 @@ define([
 
     app_router.on('route:edit', function (id) {
            console.log("ROUTE"+this.routes[Backbone.history.fragment]);
-        var editView = new EditView()
+        var editView = new EditView({router: app_router});
         editView.render({id: id});
     });
+
 
     Backbone.history.start();
     

@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-md-6">
+	<div id="succ" class="col-md-6">
 		<div class="panel panel-primary">
             <div class="panel-heading">
                 <h3><strong><%= goal ? "Update" : "Create" %> Goal</strong></h3>
@@ -8,37 +8,55 @@
         		<form class="editGoalForm" role="form">			
 					<div class="form-group">
 						<label>Title</label>
-						<input type="text" class="form-control" name="title" value="<%= goal ? goal.get('title') : '' %>" />
+						<input id="title" type="text" class="form-control" name="title" value="<%= goal ? goal.get('title') : '' %>" />
 					</div>
 				  	<div class="form-group">
-						<label>Goal start</label>
-						<input type="text" class="form-control" name="goalDateStart" value="<%= goal ? goal.get('goalDateStart') : '' %>" />
-					</div>
+				    	<label for="date">Date</label>
+				    	<div id="datetimepicker" class="input-group date">
+				        	<input type="text" class="form-control" id="dateStart" name="goalDateStart" placeholder="<%= goal ? new Date(goal.get('goalDateStart')) : '' %>" data-type="date" data-format="YYYY/MM/DD hh:mm">
+				        	<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+				    	</div>
+				    </div>
 				  	<div class="form-group">
-						<label>Goal end</label>
-						<input type="text" class="form-control" name="goalDateEnd" value="<%= goal ? goal.get('goalDateEnd') : '' %>" />
-					</div>
+				    	<label for="date">Date</label>
+				    	<div id="datetimepicker2" class="input-group date">
+				        	<input type="text" class="form-control" id="dateEnd" name="goalDateEnd" placeholder="<%= goal ? new Date(goal.get('goalDateEnd')) : '' %>" data-type="date" data-format="YYYY/MM/DD hh:mm">
+				        	<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+				    	</div>
+				    </div>
 				  	<div class="form-group">
 						<label>Value</label>
-						<input type="text" class="form-control" name="goalValue" value="<%= goal ? goal.get('goalValue') : '' %>" />
+						<input id="goalValue" type="text" class="form-control" name="goalValue" value="<%= goal ? goal.get('goalValue') : '' %>" />
 					</div>
+				
 					<% if(goal){ %>
-						<input type="hidden" name="id" value="<%= goal.get('id') %>" />
-						<input type="hidden" name="goalType" value="<%= goal.get('goalType') %>" />
-						<input type="hidden" class="form-control" name="updatedAt" value="<%= goal.get('updatedAt') %>" />
-						<input type="hidden" class="form-control" name="userId" value="<%= goal.get('userId') %>" />
+						<input id="idGoal" type="hidden" name="id" value="<%= goal.get('id') %>" />
+						<input id="goalType" type="hidden" name="goalType" value="<%= goal.get('goalType') %>" />
+						<input id="updatedAt" type="hidden" class="form-control" name="updatedAt" value="<%= new Date().getTime() %>" />
+						<input id="userId" type="hidden" class="form-control" name="userId" value="<%= goal.get('userId') %>" />
+						<button id="submitGoal" type="submit" class="btn btn-info"><%= goal ? "Update" : "Create" %></button>
 						<button class="btn btn-danger delete">Delete</button>
+					<% } else { %>
+						<div class="form-group">
+							<label>Type</label>
+							<select id="goalType"  name="goalType" class="form-control">
+								<option value="1">weight</option>
+								<option value="2">calories</option>
+								<option value="3">distance</option>
+								<option value="4">sleep</option>
+								<option value="5">steps</option>
+								<option value="6">floors</option>
+							</select>
+						</div>
+						<input id="updatedAt" type="hidden" class="form-control" name="updatedAt" value="<%= new Date().getTime() %>" />
+						<input id="userId" type="hidden" class="form-control" name="userId" value="1" />
+						<button id="submitGoal" type="submit" class="btn btn-info"><%= goal ? "Update" : "Create" %></button>
 					<% }; %>
-
-					<button type="submit" class="btn btn-info"><%= goal ? "Update" : "Create" %></button>
+					
 				</form>
 
             </div>
         </div>
-
-
-
-		
 	</div>
 	<div class="col-md-6">
 

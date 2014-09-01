@@ -16,11 +16,7 @@ define([
 		el : ".content",
 		render : function (options) {
 			var that = this;
-			if(options.goalId){
-				console.log("entro IF")
-				console.log(options.goalId);
-
-				console.log("ista mygoal");
+			if(options.goalId){;
 				that.mygoal = new Goal({id: options.goalId});
 				console.log(that.mygoal);
 				that.mygoal.fetch({

@@ -29,7 +29,7 @@ define([
       return o;
     };
 
-    Router.initialize();        
+    Router.initialize();
     
   };
 
