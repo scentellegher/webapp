@@ -4,8 +4,6 @@ define([
   'backbone',
   'bootstrap',
   'collections/goalList',
-  // Using the Require.js text! plugin, we are loaded raw text
-  // which will be used as our views primary template
   'text!templates/goal/goalTemplate.html'
 ], function($, _, Backbone, $, Goals, goalsTemplate){
 

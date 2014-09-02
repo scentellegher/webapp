@@ -7,8 +7,6 @@ define([
   'collections/datapointList',
   'models/goal',
   'gchart',
-  // Using the Require.js text! plugin, we are loaded raw text
-  // which will be used as our views primary template
   'text!templates/datapoint/datapointTemplate.html'
 ], function($, _, Backbone, $, Datapoint, Datapoints, Goal, gchart, datapointTemplate ){
 
@@ -18,7 +16,6 @@ define([
 			var that = this;
 			if(options.goalId){;
 				that.mygoal = new Goal({id: options.goalId});
-				console.log(that.mygoal);
 				that.mygoal.fetch({
 					success: function (){
 						console.log(that.mygoal);
@@ -48,11 +45,6 @@ define([
 						var my_array = [['Day','Measure', 'Goal']];
 						var day_number = 1;	
 						that.datapoints.each(function (datapoint) {
-							// if (day_number==that.datapoints.length){
-							// 	my_array.push([day_number.toString() , datapoint.get('value'), that.mygoal.get('goalValue')]);	
-							// } else {
-							// 	my_array.push([day_number.toString() , datapoint.get('value'), null]);
-							// }
 							my_array.push([day_number.toString() , datapoint.get('value'), that.mygoal.get('goalValue')]);	
 							day_number++;
 						});         
@@ -68,26 +60,27 @@ define([
 				        		"legend":"none"
 				        };
 				        
-						var template = _.template(datapointTemplate, {datapoints: that.datapoints, goal: that.mygoal});
+				        //calculate days left
+				        var d = new Date();
+						var currDate = d.getTime();
+						var dateEnd = that.mygoal.get('goalDateEnd');
+						var dateStart = that.mygoal.get('goalDateStart');
+						var tot = dateEnd -dateStart;
+						var perc = ((dateEnd - currDate)/tot)*100;
+						var res = (dateEnd - currDate)/(1000*60*60*24);
+						var daysLeft = Math.floor(res);
+
+						var template = _.template(datapointTemplate, {datapoints: that.datapoints, goal: that.mygoal, daysLeft: daysLeft, perc: perc});
 						that.$el.html(template);		
 
-				        console.log("ELEMENTO?");
-				        console.log(document.getElementById('gviz'));
-						var chart = new gchart.LineChart(document.getElementById('gviz'));
-        				chart.draw(data, options);
+				        if(that.datapoints.length!=0){
+							var chart = new gchart.LineChart(document.getElementById('gviz'));
+        					chart.draw(data, options);
+        				}
 
 					}
 				});
-			}else{
-				console.log("problema");
 			}
-		},
-		events: {
-			"click .mygoals.a" : "editData"
-		},
-		editData : function (ev) {
-			console.log("SAJDAL");
-			return false; //do not refresh the browser
 		}
 	});
 	return DataView;

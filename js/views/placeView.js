@@ -39,7 +39,6 @@ define([
               icon: ico
             });  
           });
-          console.log("lunghezza="+points.length);
 
           // define map options
           var mapOptions = {
@@ -47,11 +46,7 @@ define([
             zoom: 14
           };
 
-          console.log(mapOptions);
           // init map
-          
-          console.log("esiste? "+ document.getElementById("mappa"));
-          console.log("esiste? "+ document.getElementById("map-canvas"));
           var map = new gmaps.Map(document.getElementById("map-canvas"), mapOptions);
           
           // define markers
@@ -59,7 +54,7 @@ define([
           _.each(points, function(point){
             markers.push(new gmaps.Marker(point));
           });
-          console.log(markers);
+
           // add markers to map
           _.each(markers, function(marker){
             marker.setMap(map);
@@ -68,6 +63,6 @@ define([
       });
     }
   });
-  // Our module now returns our view
+  
   return PlaceView;
 });

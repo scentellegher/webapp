@@ -11,12 +11,8 @@ define([
 
 	var GoalView = Backbone.View.extend({
 		el : "#succ",
-		render : function (){
-			// console.log("create template");
-			var template = _.template(successTemplate, {});
-			// console.log("create template");
-			// console.log(this.$el);
-			// console.log("create template");
+		render : function (options){
+			var template = _.template(successTemplate, {path: options.path});
 			this.$el.html(template);		
 		}
 	});

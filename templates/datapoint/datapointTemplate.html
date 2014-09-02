@@ -1,6 +1,6 @@
-<div class="row">
 
-	<% var selectType = function () {
+
+<% var selectType = function () {
 			if (goal.get('goalType')==1) {
 				return { t:"weight", m:"kg"};; 
 			}else if (goal.get('goalType')==2) {
@@ -18,7 +18,8 @@
 			};
 		} %>
 
-	<div class="col-md-7">
+<div class="row">
+	<div class="col-md-6">
 		<div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title"><strong>Information</strong></h3>
@@ -31,15 +32,6 @@
 					<h3><strong>End at:</strong> <%= new Date(goal.get('goalDateEnd')) %></h3>
 				</div>	
 				<div class="alert alert-info" role="alert">
-					<%  var d = new Date();
-						var currDate = d.getTime();
-						var dateEnd = goal.get('goalDateEnd');
-						var dateStart = goal.get('goalDateStart');
-						var tot = dateEnd -dateStart;
-						var perc = ((dateEnd - currDate)/tot)*100;
-						var res = (dateEnd - currDate)/(1000*60*60*24);
-						var daysLeft = Math.floor(res);
-					%>
 					<h3><strong>Days left:</strong> <%= daysLeft %></h3>
 					<div class="progress">
 				  		<div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= perc %>%">
@@ -54,12 +46,12 @@
                 <h3 class="panel-title"><strong>Your <%= selectType().t%> situation</strong></h3>
             </div>
             <div class="panel-body">
-            	<div id="gviz" class="col-md-7" style="width:650px;height:300px;"></div>
+            	<div id="gviz" class="col-md-7" style="width:550px;height:300px;"></div>
             </div>
         </div>
     </div>
 	
-    <div class="col-md-5">
+    <div class="col-md-6">
     	
 
 		<div class="panel panel-primary">
@@ -74,6 +66,7 @@
 							<th style="color: #015697">Value</th>
 							<th style="color: #015697">Description</th>
 							<th style="color: #015697">Date</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -86,9 +79,12 @@
 								<td> <%= datapoint.get("description") %> </td>
 								<% var time = new Date(datapoint.get("timestamp")); %>					
 								<td> <%= time %> </td>
+								<td><a href="#/goal/<%= goal.id%>/datapoint/edit/<%= datapoint.id %>" class="btn btn-danger pull-right" role="button">Edit</a></td>
 							</tr>
-						<% }); %>			
-
+						<% }); %>
+						<tr>
+							<td colspan="5"><center> <a href="#/goal/<%= goal.id%>/datapoint/new" class="btn btn-primary" role="button">Add Datapoint</a> </center> </td>
+						</tr>						
 					</tbody>
 		
 				</table>        

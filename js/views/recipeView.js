@@ -4,8 +4,6 @@ define([
   'backbone',
   'bootstrap',
   'models/recipe',
-  // Using the Require.js text! plugin, we are loaded raw text
-  // which will be used as our views primary template
   'text!templates/recipe/recipeTemplate.html'
 ], function($, _, Backbone, $, Recipe, recipeTemplate){
 

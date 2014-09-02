@@ -7,16 +7,19 @@ define([
   'views/placeView',
   'views/goalView',
   'views/dataView',
-  'views/editView'
-], function($, _, Backbone, QuoteView, RecipeView, PlaceView, GoalView, DataView, EditView){
+  'views/editGoalView',
+  'views/editDatapointView'
+], function($, _, Backbone, QuoteView, RecipeView, PlaceView, GoalView, DataView, EditGoalView, EditDatapointView){
   
   var AppRouter = Backbone.Router.extend({
     routes: {
       // Define some URL routes
       '' : 'home',
       'goal/:goalId' : "goal",
-      'edit/:id' : "edit",
-      'new' : "edit"
+      'edit/:id' : "editGoal",
+      'new' : "editGoal",
+      'goal/:goalId/datapoint/edit/:id' : "editDatapoint",
+      'goal/:goalId/datapoint/new' : "editDatapoint"
     }
   });
   
@@ -25,7 +28,6 @@ define([
     var app_router = new AppRouter;
     
     app_router.on('route:home', function(){
-      console.log("ROUTE"+this.routes[Backbone.history.fragment]);
       var quoteView = new QuoteView();
       quoteView.render();
       var recipeView = new RecipeView();
@@ -38,17 +40,19 @@ define([
     });
 
     app_router.on('route:goal', function (goalId) {
-           console.log("ROUTE"+this.routes[Backbone.history.fragment]);
         var dataView = new DataView()
         dataView.render({goalId: goalId});
     });
 
-    app_router.on('route:edit', function (id) {
-           console.log("ROUTE"+this.routes[Backbone.history.fragment]);
-        var editView = new EditView({router: app_router});
-        editView.render({id: id});
+    app_router.on('route:editGoal', function (id) { 
+        var editGoalView = new EditGoalView({router: app_router});
+        editGoalView.render({id: id});
     });
 
+    app_router.on('route:editDatapoint', function (goalId, id) {
+        var editDatapointView = new EditDatapointView({router: app_router});
+        editDatapointView.render({ goalId: goalId, id: id });
+    });
 
     Backbone.history.start();
     

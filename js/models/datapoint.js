@@ -1,5 +1,6 @@
 define(['underscore','backbone'], function(_, Backbone) {
   var Datapoint = Backbone.Model.extend({
+    urlRoot: "/storage/datapoint",
 		defaults: {
 			"description": "None",
             "goalId": 0,

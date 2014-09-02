@@ -1,0 +1,36 @@
+<div class="row">
+	<div id="succ" class="col-md-6">
+		<div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3><strong><%= datapoint ? "Update" : "Create" %> Datapoint</strong></h3>
+            </div>
+            <div class="panel-body">
+        		<form class="editDatapointForm" role="form">			
+					<div class="form-group">
+						<label>Description</label>
+						<input id="description" type="text" class="form-control" name="description" value="<%= datapoint ? datapoint.get('description') : '' %>" />
+					</div>
+				  	<div class="form-group">
+						<label>Value</label>
+						<input id="value" type="text" class="form-control" name="value" value="<%= datapoint ? datapoint.get('value') : '' %>" />
+					</div>
+					<input type="hidden" name="timestamp" value="<%= new Date().getTime() %>" />
+					<% if(datapoint){ %>
+						<input type="hidden" name="id" value="<%= datapoint.get('id') %>" />
+						<input type="hidden" name="goalId" value="<%= datapoint.get('goalId') %>" />
+						<button id="submitDatapoint" type="submit" class="btn btn-info"><%= datapoint ? "Update" : "Create" %></button>
+						<button class="btn btn-danger delete">Delete</button>
+					<% } else { %>
+						<input type="hidden" class="form-control" name="goalId" value="<%= goalId%>" />
+						<button id="submitDatapoint" type="submit" class="btn btn-info"><%= datapoint ? "Update" : "Create" %></button>
+					<% }; %>
+					
+				</form>
+
+            </div>
+        </div>
+	</div>
+	<div class="col-md-6">
+
+	</div>
+</div>

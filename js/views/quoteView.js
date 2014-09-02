@@ -4,8 +4,6 @@ define([
   'backbone',
   'bootstrap',
   'models/quote',
-  // Using the Require.js text! plugin, we are loaded raw text
-  // which will be used as our views primary template
   'text!templates/quote/quoteTemplate.html'
 ], function($, _, Backbone, $, Quote, quoteTemplate){
 

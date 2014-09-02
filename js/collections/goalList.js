@@ -14,11 +14,6 @@ define([
     parse: function (response) {
       return response.goals; // The rest server returns datapoints under "datapoints".
     }
-    // model: Goal,
-  	// url: "/storage/goals/1", 
-  	// parse: function (response) {
-  	// 	return response.goals; // The rest server returns goals under "goals".
-  	// }
   });
   return GoalList;
 });
